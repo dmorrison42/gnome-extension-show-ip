@@ -18,6 +18,10 @@ const NetworkManager = imports.gi.NetworkManager;
 const NOT_CONNECTED = 'not connected'
 const NM_NOT_RUNNING = 'NM not running'
 
+const ExtensionUtils = imports.misc.extensionUtils;
+const Me = ExtensionUtils.getCurrentExtension();
+const Convenience = Me.imports.convenience;
+
 function init() {
 
 }
@@ -43,6 +47,7 @@ const IpMenu = new Lang.Class({
 
       this.nmStarted = true;
       this.selectedDevice = null;
+      this._schema = Convenience.getSettings();
 
       this.parent(0.0, _("Show IP"));
 
@@ -103,9 +108,12 @@ const IpMenu = new Lang.Class({
    _createPopupMenu: function() {
       this.menu.removeAll();
       for (let device of this._devices) {
-         if (device.activated== true){
+         if (device.activated == true){
             this._addToPopupMenu(device.ifc);
          }
+      }
+      if (this._schema.get_boolean('public-ip') == true){
+         this._addToPopupMenu("public");
       }
    },
 
@@ -247,6 +255,7 @@ const IpMenu = new Lang.Class({
 
    destroy: function() {
       this.parent();
+      this._schema.run_dispose();
       if (this.nmStarted == true) {
          for (let device of this._devices) {
             this._resetDevice(device);

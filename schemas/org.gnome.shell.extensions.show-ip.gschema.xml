@@ -1,28 +1,40 @@
 <schemalist gettext-domain="show-ip">
-    <enum id="org.gnome.shell.extensions.show-ip.display-style">
+ <!--   <enum id="org.gnome.shell.extensions.show-ip.display-style">
         <value value="0" nick="digit"/>
         <value value="1" nick="graph"/>
         <value value="2" nick="both"/>
     </enum>
+ -->
     <schema id="org.gnome.shell.extensions.show-ip" path="/org/gnome/shell/extensions/show-ip/">
-        <key name="icon-display" type="b">
+        <key name="public-ip" type="b">
+            <default>false</default>
+            <summary>Add entry for public ip display selection</summary>
+            <description>Set to true to display public ip in interface list.</description>
+        </key>
+        <key name="curl-method" type="b">
             <default>true</default>
-            <summary>Display system monitor icon</summary>
-            <description>Set to true to display system monitor icon in status bar.(NOTICE: The icon will be shown when none of the others is shown.)</description>
+            <summary></summary>
+            <description></description>
         </key>
-        <key name="memory-refresh-time" type="i">
-            <default>5000</default>
-            <summary>Memory refresh time</summary>
-            <description>Time in ms between 2 refresh of memory</description>
+        <key name="wget-method" type="b">
+            <default>false</default>
+            <summary></summary>
+            <description></description>
         </key>
-        <key name="freq-style" enum="org.gnome.shell.extensions.show-ip.display-style">
-            <default>'graph'</default>
-            <summary>Choose the display style.</summary>
+        <key name="ip-destination" type="s">
+            <default>'https://wtfismyip.com/text'</default>
+            <summary>Public IP service</summary>
+            <description>Service giving public IP as seen from internet</description>
         </key>
-        <key name="thermal-sensor-file" type="s">
-            <default>'/sys/devices/virtual/thermal/thermal_zone0/temp'</default>
-            <summary>Sensor File</summary>
-            <description>Location of the sensor file for cpu temp</description>
-        </key>
+        <!--       <key name="memory-refresh-time" type="i">
+                   <default>5000</default>
+                   <summary>Memory refresh time</summary>
+                   <description>Time in ms between 2 refresh of memory</description>
+               </key>
+               <key name="freq-style" enum="org.gnome.shell.extensions.show-ip.display-style">
+                   <default>'graph'</default>
+                   <summary>Choose the display style.</summary>
+               </key>
+ -->
     </schema>
 </schemalist>
